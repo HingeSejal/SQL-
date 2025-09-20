@@ -1,0 +1,22 @@
+GROUP BY -result is determined by the unique vls of grped cls
+---------------------
+ORDER By -to sort the data in asc and desc order
+--------------------
+we use AS-ALIAS in the aggregate fun to name new col after summing up (sum(col))
+----------------------
+select country , 
+       sum(score) as total_score ,
+       count(id) as total_customers
+from customers
+where score>400
+group by country
+having sum(score) > 800
+
+ the syntax goes like
+ 0. in where we filter before aggregating fun
+ 1. in group by u should write the selected col
+ 2. while writing having we write condition using aggregated fun
+
+ BEFORE aggregation - where
+ AFTER aggregation - having
+ --------------------------
