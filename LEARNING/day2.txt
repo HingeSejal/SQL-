@@ -1,0 +1,19 @@
+Distinct - Remove Duplication , each val appears once only
+select distinct country from customers 
+---> will give country name only once
+
+Top - to get top few rows
+select top 3 * from table 
+
+-----------------------------
+
+select country , avg(score) as avg_score 
+from customers
+where score!=0
+group by country 
+having avg(score)>430 
+order by country asc ;
+
+
+execution order => 
+from -> where -> grp by -> having -> select distinct -> order by -> top
