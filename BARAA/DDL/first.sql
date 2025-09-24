@@ -13,5 +13,3 @@ alter table persons
 drop column phone 
 select * from persons 
 
-select * from customers
-where country = "USA"

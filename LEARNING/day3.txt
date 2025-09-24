@@ -1,0 +1,28 @@
+SET - we join data one after another like stack
+JOIN - we combine data/cols horizontaly
+
+TYPES OF SET------
+union
+union all
+except
+intersect
+
+TYPES OF JOINS-----
+1] Basic JOIN
+no join - nothing is common
+inner join - common in both A and B
+full join  - both A nd B 
+left join  - left col + B's common part
+right join - right col + A's common part
+
+2] Advanced JOIN
+left anti join
+right anti join
+full anti join
+cross join
+
+USE OF JOINS-------
+1.Data enrichment - getting extra data
+2.Recombine data - big picture
+3.checking existance- filtering
+
