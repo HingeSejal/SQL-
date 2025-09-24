@@ -9,5 +9,14 @@
 -- right join - right col + A's common part
 
 
-select first_name from customers
-join 
+-- inner join - returns only matching rows from both tables
+SELECT 
+    c.id, 
+    c.first_name,
+    o.customer_id,
+    o.sales
+FROM customers AS c
+INNER JOIN orders AS o
+    ON c.id = o.customer_id
+WHERE c.id = 3;
+
