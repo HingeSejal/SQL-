@@ -26,3 +26,6 @@ USE OF JOINS-------
 2.Recombine data - big picture
 3.checking existance- filtering
 
+-----------------------------
+
+if u alter the table sequence in (from  and join) in left join u will get right join
