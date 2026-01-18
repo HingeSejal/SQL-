@@ -1,0 +1,244 @@
+postgres=# \c advjavadb;
+You are now connected to database "advjavadb" as user "postgres".
+advjavadb=# select * from student;
+ rno |   name    | per
+-----+-----------+------
+  11 | sejaaaalu |   87
+  54 | sejala    | 97.9
+  13 | lok       | 98.8
+(3 rows)
+
+
+advjavadb=# create table teacher(rno serial , name varchar(20) not null,per float);
+CREATE TABLE
+advjavadb=# insert into student(name , per) values('Rekha',98.8),('Ramesh',95.8),('Vidya',92.4),('Balram',87.8),('Raul',76.8),('Megha',79.2),('Nupur',73);
+ERROR:  null value in column "rno" of relation "student" violates not-null constraint
+DETAIL:  Failing row contains (null, Rekha, 98.8).
+advjavadb=# insert into teacher(name , per) values('Rekha',98.8),('Ramesh',95.8),('Vidya',92.4),('Balram',87.8),('Raul',76.8),('Megha',79.2),('Nupur',73);
+INSERT 0 7
+advjavadb=# select * from student;
+ rno |   name    | per
+-----+-----------+------
+  11 | sejaaaalu |   87
+  54 | sejala    | 97.9
+  13 | lok       | 98.8
+(3 rows)
+
+
+advjavadb=# select * from teacher;
+ rno |  name  | per
+-----+--------+------
+   1 | Rekha  | 98.8
+   2 | Ramesh | 95.8
+   3 | Vidya  | 92.4
+   4 | Balram | 87.8
+   5 | Raul   | 76.8
+   6 | Megha  | 79.2
+   7 | Nupur  |   73
+(7 rows)
+
+
+advjavadb=# insert into teacher(name , per) values('Sejal',98.8),('Varun',95.8),('Nahik',93.4),('Dnyanda',89.8),('Piyush',71.8),('Ethiya',73.2),('Utku',85);
+INSERT 0 7
+advjavadb=# select * from teacher;
+ rno |  name   | per
+-----+---------+------
+   1 | Rekha   | 98.8
+   2 | Ramesh  | 95.8
+   3 | Vidya   | 92.4
+   4 | Balram  | 87.8
+   5 | Raul    | 76.8
+   6 | Megha   | 79.2
+   7 | Nupur   |   73
+   8 | Sejal   | 98.8
+   9 | Varun   | 95.8
+  10 | Nahik   | 93.4
+  11 | Dnyanda | 89.8
+  12 | Piyush  | 71.8
+  13 | Ethiya  | 73.2
+  14 | Utku    |   85
+(14 rows)
+
+
+advjavadb=# select * from student;
+ rno |   name    | per
+-----+-----------+------
+  11 | sejaaaalu |   87
+  54 | sejala    | 97.9
+  13 | lok       | 98.8
+(3 rows)
+
+
+advjavadb=# Alter table student add column phno varchar(10) unique;
+ALTER TABLE
+advjavadb=# select * from student;
+ rno |   name    | per  | phno
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+(3 rows)
+
+
+advjavadb=# Alter table student rename column phno to wtsp;
+ALTER TABLE
+advjavadb=# alter table student alter column wtsp set default 'NA';
+ALTER TABLE
+advjavadb=# select * from student;
+ rno |   name    | per  | wtsp
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+(3 rows)
+
+
+advjavadb=# alter table student alter column wtsp drop default;
+ALTER TABLE
+advjavadb=# select * from student;
+ rno |   name    | per  | wtsp
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+(3 rows)
+
+
+advjavadb=# alter table student alter column wtsp set default 'NA';
+ALTER TABLE
+advjavadb=# insert into student(rno , name , per) values(12,'Raha',89);
+INSERT 0 1
+advjavadb=# select * from student;
+ rno |   name    | per  | wtsp
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+  12 | Raha      |   89 | NA
+(4 rows)
+
+
+advjavadb=# alter table student alter column wtsp drop default ;
+ALTER TABLE
+advjavadb=# select * from student;
+ rno |   name    | per  | wtsp
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+  12 | Raha      |   89 | NA
+(4 rows)
+
+
+advjavadb=# insert into student(rno , name , per) values(14,'Vihan',82);
+INSERT 0 1
+advjavadb=# select * from student;
+ rno |   name    | per  | wtsp
+-----+-----------+------+------
+  11 | sejaaaalu |   87 |
+  54 | sejala    | 97.9 |
+  13 | lok       | 98.8 |
+  12 | Raha      |   89 | NA
+  14 | Vihan     |   82 |
+(5 rows)
+
+
+advjavadb=# alter table student alter column name set not null;
+ALTER TABLE
+advjavadb=# alter table student add check(per>0 and per<=100);
+ALTER TABLE
+advjavadb=# \d
+               List of relations
+ Schema |      Name       |   Type   |  Owner
+--------+-----------------+----------+----------
+ public | student         | table    | postgres
+ public | teacher         | table    | postgres
+ public | teacher_rno_seq | sequence | postgres
+(3 rows)
+
+
+advjavadb=# \d student;
+                     Table "public.student"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ rno    | integer               |           | not null |
+ name   | character varying(20) |           | not null |
+ per    | double precision      |           |          |
+ wtsp   | character varying(10) |           |          |
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (rno)
+    "student_phno_key" UNIQUE CONSTRAINT, btree (wtsp)
+Check constraints:
+    "student_per_check" CHECK (per > 0::double precision AND per <= 100::double precision)
+
+
+advjavadb=# alter table student drop constraint student_pkey;
+ALTER TABLE
+advjavadb=# \d student;
+                     Table "public.student"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ rno    | integer               |           | not null |
+ name   | character varying(20) |           | not null |
+ per    | double precision      |           |          |
+ wtsp   | character varying(10) |           |          |
+Indexes:
+    "student_phno_key" UNIQUE CONSTRAINT, btree (wtsp)
+Check constraints:
+    "student_per_check" CHECK (per > 0::double precision AND per <= 100::double precision)
+
+
+advjavadb=# alter table student add constraint student_pkey primary key(rno);
+ALTER TABLE
+advjavadb=# \d student;
+                     Table "public.student"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ rno    | integer               |           | not null |
+ name   | character varying(20) |           | not null |
+ per    | double precision      |           |          |
+ wtsp   | character varying(10) |           |          |
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (rno)
+    "student_phno_key" UNIQUE CONSTRAINT, btree (wtsp)
+Check constraints:
+    "student_per_check" CHECK (per > 0::double precision AND per <= 100::double precision)
+
+
+advjavadb=# alter table student drop constraint student_per_check;
+ALTER TABLE
+advjavadb=# \d student;
+                     Table "public.student"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ rno    | integer               |           | not null |
+ name   | character varying(20) |           | not null |
+ per    | double precision      |           |          |
+ wtsp   | character varying(10) |           |          |
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (rno)
+    "student_phno_key" UNIQUE CONSTRAINT, btree (wtsp)
+
+
+advjavadb=# alter table student alter column name set default null;
+ALTER TABLE
+advjavadb=# insert into student(rno ,per) values(15,61);
+ERROR:  null value in column "name" of relation "student" violates not-null constraint
+DETAIL:  Failing row contains (15, null, 61, null).
+advjavadb=# alter table student rename to stud;
+ALTER TABLE
+advjavadb=# alter table stud alter column name type varchar(10);
+ALTER TABLE
+advjavadb=# \d student;
+Did not find any relation named "student".
+advjavadb=# \d stud;
+                               Table "public.stud"
+ Column |         Type          | Collation | Nullable |         Default
+--------+-----------------------+-----------+----------+-------------------------
+ rno    | integer               |           | not null |
+ name   | character varying(10) |           | not null | NULL::character varying
+ per    | double precision      |           |          |
+ wtsp   | character varying(10) |           |          |
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (rno)
+    "student_phno_key" UNIQUE CONSTRAINT, btree (wtsp)

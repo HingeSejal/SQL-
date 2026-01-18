@@ -1,0 +1,68 @@
+till lec 11
+
+Q.Why we use varchar for storing phone no and not int???
+-> Because
+
+1)Some phone numbers start with 0 (e.g., India local: 0987654321)
+  INT would drop leading zeros → stored as 987654321
+
+2)INT can store up to 647 (32-bit) but too less for storing a number
+  BIGINT can store larger numbers but is unnecessary and wastes space
+
+3)Phone numbers often have + sign for country code: +91 9876543210
+  Hyphens: 987-654-3210
+  INT cannot store + or -
+
+4)Regex works naturally with strings
+  If phone was INT, regex becomes complicated or impossible
+
+5)They are identifiers, not numeric values
+  VARCHAR is perfect for identifiers
+
+----------------------------------------------------------
+Q.Validating Data in PostgresSQL
+
+create sequence tcaseq start 101;
+
+create table student(
+rno int default nextval('tcaseq'),
+fname varchar(10) not null check (fname ~* '[A-Z]'),
+lname varchar(10) not null check (lname ~* '[A-Z]'),
+primary key (rno,fname,lname),
+per float CHECK (per>0 AND per<100),
+phone varchar(20) check(phone ~ '^[7-9]{1}[0-9]{9}$'),
+Adm_Date DATE default current_DATE
+);
+
+INSERT INTO student (fname, lname, per, phone)
+VALUES ('Sejal', 'Hinge', 98.6, '9876543210');
+
+~ - reular exp
+* - case insensitive 
+-----------------------------------------------------------
+
+Q.Validating Data in SQL
+
+create table student(
+rno int AUTO_INCREMENT,
+fname varchar(10) not null check (fname REGEXP '(?i)^[A-Z]+$'),
+lname varchar(10) not null check (lname REGEXP '(?i)^[A-Z]+$'),
+per float CHECK (per>0 AND per<100),
+phone varchar(20) check(phone REGEXP '^[7-9]{1}[0-9]{9}$'),
+Adm_Date DATETIME default CURRENT_TIMESTAMP,
+primary key (rno),
+Unique (fname,lname)
+)auto_increment=101;
+
+INSERT INTO student (fname, lname, per, phone)
+VALUES ('Sejal', 'Hinge', 98.6, '9876543210');
+
+
+?i - ignore case
+^  - start with
++  - one or more times
+$  - end of string
+
+here only auto_incremented col is primary key
+=============================================================
+

@@ -1,0 +1,99 @@
+advjavadb=# create table lad(rno serial,fname varchar(10), lname varchar(10), per float);
+CREATE TABLE
+advjavadb=# insert into lad values('sejal','hinge',97);
+ERROR:  invalid input syntax for type integer: "sejal"
+LINE 1: insert into lad values('sejal','hinge',97);
+                               ^
+advjavadb=# insert into lad values(1,'sejal','hinge',97);
+INSERT 0 1
+advjavadb=# select rno rollnum from lad;
+ rollnum
+---------
+       1
+(1 row)
+
+
+advjavadb=# select rno rollnum , fanme ||' '||lname, per from lad;
+ERROR:  column "fanme" does not exist
+LINE 1: select rno rollnum , fanme ||' '||lname, per from lad;
+                             ^
+HINT:  Perhaps you meant to reference the column "lad.fname".
+advjavadb=# select rno rollnum , fname ||' '||lname, per from lad;
+ rollnum |  ?column?   | per
+---------+-------------+-----
+       1 | sejal hinge |  97
+(1 row)
+
+
+advjavadb=# select rno rollnum , fname ||' '||lname as name, per from lad;
+ rollnum |    name     | per
+---------+-------------+-----
+       1 | sejal hinge |  97
+(1 row)
+
+
+advjavadb=# select rno rollnum , fname ||' '||lname as "full name", per from lad;
+ rollnum |  full name  | per
+---------+-------------+-----
+       1 | sejal hinge |  97
+(1 row)
+
+
+advjavadb=# select distinct per from teacher;
+ per
+------
+ 79.2
+   85
+   73
+ 87.8
+ 95.8
+ 89.8
+ 71.8
+ 92.4
+ 98.8
+ 93.4
+ 76.8
+ 73.2
+(12 rows)
+
+
+advjavadb=# select distinct per from teacher order by per desc;
+ per
+------
+ 98.8
+ 95.8
+ 93.4
+ 92.4
+ 89.8
+ 87.8
+   85
+ 79.2
+ 76.8
+ 73.2
+   73
+ 71.8
+(12 rows)
+
+
+advjavadb=# select name , distinct per from teacher order by per desc;
+ERROR:  syntax error at or near "distinct"
+LINE 1: select name , distinct per from teacher order by per desc;
+                      ^
+advjavadb=# select * from teacher;
+ rno |  name   | per
+-----+---------+------
+   1 | Rekha   | 98.8
+   2 | Ramesh  | 95.8
+   3 | Vidya   | 92.4
+   4 | Balram  | 87.8
+   5 | Raul    | 76.8
+   6 | Megha   | 79.2
+   7 | Nupur   |   73
+   8 | Sejal   | 98.8
+   9 | Varun   | 95.8
+  10 | Nahik   | 93.4
+  11 | Dnyanda | 89.8
+  12 | Piyush  | 71.8
+  13 | Ethiya  | 73.2
+  14 | Utku    |   85
+(14 rows)
