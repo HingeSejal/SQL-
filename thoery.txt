@@ -1,0 +1,75 @@
+GROUP BY -result is determined by the unique vls of grped cls
+---------------------
+ORDER By -to sort the data in asc and desc order
+--------------------
+we use AS-ALIAS in the aggregate fun to name new col after summing up (sum(col))
+----------------------
+select country , 
+       sum(score) as total_score ,
+       count(id) as total_customers
+from customers
+where score>400
+group by country
+having sum(score) > 800
+
+ the syntax goes like
+ 0. in where we filter before aggregating fun
+ 1. in group by u should write the selected col
+ 2. while writing having we write condition using aggregated fun
+
+ BEFORE aggregation - where
+ AFTER aggregation - having
+ --------------------------
+
+ Distinct - Remove Duplication , each val appears once only
+select distinct country from customers 
+---> will give country name only once
+
+Top - to get top few rows
+select top 3 * from table 
+
+-----------------------------
+
+select country , avg(score) as avg_score 
+from customers
+where score!=0
+group by country 
+having avg(score)>430 
+order by country asc ;
+
+
+execution order => 
+from -> where -> grp by -> having -> select distinct -> order by -> top
+
+-------------------------------
+SET - we join data one after another like stack
+JOIN - we combine data/cols horizontaly
+
+TYPES OF SET------
+union
+union all
+except
+intersect
+
+TYPES OF JOINS-----
+1] Basic JOIN
+no join - nothing is common
+inner join - common in both A and B
+full join  - both A nd B 
+left join  - left col + B's common part
+right join - right col + A's common part
+
+2] Advanced JOIN
+left anti join
+right anti join
+full anti join
+cross join
+
+USE OF JOINS-------
+1.Data enrichment - getting extra data
+2.Recombine data - big picture
+3.checking existance- filtering
+
+-----------------------------
+
+if u alter the table sequence in (from  and join) in left join u will get right join
