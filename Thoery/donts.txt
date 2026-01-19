@@ -1,0 +1,2 @@
+❌ COUNT() cannot be used in WHERE
+count(condition) its invalid -> ❌ does NOT count true/false 
