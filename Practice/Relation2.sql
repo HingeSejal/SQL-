@@ -106,9 +106,6 @@ tcadb=# select stud.name stud_name, faculty.name faculty_name, ldate from stud,f
 (3 rows)
 
 
-tcadb=# select stud.name stud_name, faculty.name faculty_name, ldate from stud,faculty,stud_faculty where stud.rno = stud_faculty.rno AND faculty.tno = stud_faculty.tno orderby faculty.name;
-ERROR:  syntax error at or near "orderby"
-LINE 1: ...ud_faculty.rno AND faculty.tno = stud_faculty.tno orderby fa...
                                                              ^
 tcadb=# select stud.name stud_name, faculty.name faculty_name, ldate from stud,faculty,stud_faculty where stud.rno = stud_faculty.rno AND faculty.tno = stud_faculty.tno order by faculty.name;
  stud_name | faculty_name |   ldate
