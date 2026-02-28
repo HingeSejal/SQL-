@@ -1,2 +1,46 @@
 ❌ COUNT() cannot be used in WHERE
 count(condition) its invalid -> ❌ does NOT count true/false 
+
+-----------------------------------------------------------
+❌cant write column=null in where clause
+NULL is not a value.
+NULL represents unknown, the result is also : UNKNOWN
+And in a WHERE clause, only TRUE rows are returned
+So:
+returns no rows, even if some rows contain NULL
+So don’t use value operators (=).
+Use IS NULL/ IS NOT NULL
+
+-----------------------------------------------------------
+❌PostgreSQL insertion order check nahi karta.
+Wo execution plan ke hisaab se data process karta hai.
+Query ke time planner decide karega kaise read karna hai
+Table Statistics
+
+PostgreSQL har table ke baare me stats store karta hai:
+Total rows kitne hain?
+Distinct values kitni hain?
+NULL values kitni hain?
+Data distribution
+
+Ye stats ANALYZE command se update hote hain.
+ANALYZE atab;
+ANALYZE btab;
+
+Agar stats purane ho → planner galat decision le sakta hai.
+
+Cost Calculation
+Planner har possible plan ka estimated cost calculate karta hai.
+Sequential Scan cost
+Index Scan cost
+Hash Join cost
+Merge Join cost
+Nested Loop cost
+Fir jo plan ka cost lowest hota hai → wo choose karta hai.
+
+Available Indexes
+Agar index available hai to planner compare karta hai:
+Index use karna sasta padega?
+Ya full table scan better hai?
+
+---------------------------------------------------------
