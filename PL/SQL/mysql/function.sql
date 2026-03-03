@@ -1,0 +1,54 @@
+mysql>  show tables;
++-----------------+
+| Tables_in_tcadb |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.14 sec)
+
+mysql> select * from student;
++-----+-------+---------+------+------------+---------------------+
+| rno | fname | lname   | per  | phone      | Adm_Date            |
++-----+-------+---------+------+------------+---------------------+
+| 101 | Sejal | Hinge   | 98.6 | 9876543210 | 2026-01-06 13:34:27 |
+| 102 | Shree | Khamkar | 99.6 | 9876543210 | 2026-01-06 15:16:40 |
++-----+-------+---------+------+------------+---------------------+
+2 rows in set (0.04 sec)
+
+
+mysql> Delimiter $$
+mysql> create function get_result(prno int)
+    -> returns varchar(30)
+    -> deterministic
+    -> begin
+    -> declare tper float;
+    -> declare status varchar(30);
+    -> select per into tper
+    -> from student
+    -> where rno = prno;
+    -> if tper>= 40 then
+    -> set status = 'Pass';
+    -> else
+    -> set status = 'FAIL';
+    -> end if;
+    -> return status;
+    -> end$$
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> delimiter ;
+mysql>
+mysql> select get_result(101);
++-----------------+
+| get_result(101) |
++-----------------+
+| Pass            |
++-----------------+
+1 row in set (0.03 sec)
+
+mysql> select get_result(102);
++-----------------+
+| get_result(102) |
++-----------------+
+| Pass            |
++-----------------+
+1 row in set (0.00 sec)

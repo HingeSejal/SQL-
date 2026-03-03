@@ -51,3 +51,4 @@ tcadb=# select sum_ofn_nums(10);
            55
 (1 row)
 
+

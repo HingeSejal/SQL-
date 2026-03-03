@@ -114,3 +114,31 @@ tcadb=# select get_result(2);
  Absentt!!!!!!
 (1 row)
 
+tcadb=# create or replace function get_result(perno int)
+tcadb-# returns text
+tcadb-# language plpgsql
+tcadb-# as $$
+tcadb$# declare
+tcadb$# tper Stud.per%type;
+tcadb$# status text;
+tcadb$# begin
+tcadb$# select per into tper
+tcadb$# from stud
+tcadb$# where rno = perno ;
+tcadb$# if NOT FOUND THEN
+tcadb$# return 'Student Does not Exist !!!';
+tcadb$# end if;
+tcadb$# if tper is null then
+tcadb$# return 'Absentt !!!';
+tcadb$# end if;
+tcadb$# if tper >= 40 then
+tcadb$# status := 'pass';
+tcadb$# else
+tcadb$# status := 'fail';
+tcadb$# end if;
+tcadb$# return status;
+tcadb$# end;
+tcadb$# $$;
+CREATE FUNCTION
+
+
