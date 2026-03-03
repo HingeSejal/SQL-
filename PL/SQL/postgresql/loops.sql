@@ -22,6 +22,7 @@ tcadb=#
 tcadb=# select sum_ofnums(5);
  sum_ofnums
 ------------
+
          15
 (1 row)
 
@@ -49,3 +50,4 @@ tcadb=# select sum_ofn_nums(10);
 --------------
            55
 (1 row)
+
