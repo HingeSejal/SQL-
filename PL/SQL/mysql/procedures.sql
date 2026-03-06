@@ -77,3 +77,8 @@ CALL print_dt();
 1 row in set (0.02 sec)
 
 Query OK, 0 rows affected (0.03 sec)
+
+------------------------------------------------
+
+-- use when u have to perform crud operations and logs 
+
