@@ -25,7 +25,7 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "MySql local",
-            "database": "tcadb",
+            "database": "mydb",
             "username": "root",
             "password": "password"
         }
