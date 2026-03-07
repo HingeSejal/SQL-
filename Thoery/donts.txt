@@ -49,5 +49,6 @@ Ya full table scan better hai?
 because functions return a value and it can be deterministic or not deterministic 
 but procedures do not return any value
 
----------------------------------------------------------
+----------------------------------------------------------
+
 
