@@ -20,7 +20,7 @@ Q.Why we use varchar for storing phone no and not int???
   VARCHAR is perfect for identifiers
 
 ----------------------------------------------------------
-Q.Validating Data in PostgresSQL
+Q.Validating Data in PostgreSQL
 
 create sequence tcaseq start 101;
 
@@ -41,7 +41,7 @@ VALUES ('Sejal', 'Hinge', 98.6, '9876543210');
 * - case insensitive 
 -----------------------------------------------------------
 
-Q.Validating Data in SQL
+Q.Validating Data in MySQL
 
 create table student(
 rno int AUTO_INCREMENT,

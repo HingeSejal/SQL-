@@ -17,6 +17,8 @@ mysql> select message();
 +--------------+
 1 row in set (0.02 sec)
 
+
+-- deterministic can be used only in functions not in procedures because functions return a value and it can be deterministic or not deterministic but procedures do not return any value so it cannot be deterministic or not deterministic
 mysql> delimiter $$
 mysql> create function today_date()
     -> returns date
