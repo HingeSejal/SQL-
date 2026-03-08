@@ -51,4 +51,6 @@ but procedures do not return any value
 
 ----------------------------------------------------------
 
+❌dont use HAVING without GROUP BY 
 
+----------------------------------------------------------
