@@ -1,6 +1,3 @@
-C:\Users\sejuh\OneDrive\Desktop\IDE\Sql\sqlite-tools-win-x64-3510300>sqlite3 test.db
-SQLite version 3.51.3 2026-03-13 10:38:09
-Enter ".help" for usage hints.
 sqlite> CREATE TABLE students(
 (x1...> id INTEGER PRIMARY KEY,
 (x1...> name TEXT,
@@ -111,7 +108,6 @@ sqlite> INSERT INTO students VALUES(49,'Zara',22,'UAE');
 sqlite> INSERT INTO students VALUES(50,'Bilal',23,'Pakistan');
 sqlite> INSERT INTO students VALUES(51,'Noura',24,'Kuwait');
 sqlite> INSERT INTO students VALUES(52,'Layla',20,'Jordan');
-sqlite>
 sqlite> INSERT INTO students VALUES(53,'Ethan',22,'USA');
 sqlite> INSERT INTO students VALUES(54,'Mason',23,'USA');
 sqlite> INSERT INTO students VALUES(55,'Logan',21,'Canada');
@@ -184,12 +180,6 @@ sqlite> SELECT * FROM students WHERE country='India';
 48|Meera|21|India
 73|Grace|21|India
 74|Chloe|22|India
-sqlite> update students set city= case
-   ...> when c;
-Parse error: near ";": syntax error
-  update students set city= case when c;
-                         error here ---^
-sqlite>
 sqlite> update students set country= case
    ...> when country='INDIA' then 'India'
    ...> else country
@@ -273,8 +263,6 @@ sqlite> select * from students order by age asc limit 5;
 47|Aarav|19|India
 57|Mia|19|Australia
 sqlite>
-sqlite> update studens set country = UPPER(country);
-Parse error: no such table: studens
 sqlite> update students set country = UPPER(country);
 sqlite> select * from students order by age asc limit 5;
 4|Sara|19|CANADA
@@ -365,20 +353,12 @@ sqlite> select * from students where age between 20 and 23;
 100|Ariana|20|DENMARK
 101|Valentina|21|GREECE
 102|Laila|22|TURKEY
-sqlite> select * from students where name like a% and country='BELGIUM';
-Parse error: near "and": syntax error
-  select * from students where name like a% and country='BELGIUM';
-                              error here ---^
 sqlite> select * from students where name like 'a%' and country='BELGIUM';
 sqlite> select * from students where name like 's%' and country='BELGIUM';
 3|Sejal|27|BELGIUM
 94|Samantha|22|BELGIUM
 sqlite> select avg(age) from students ;
 21.7352941176471
-sqlite> select avg(age,2) from students ;
-Parse error: wrong number of arguments to function avg()
-  select avg(age,2) from students ;
-         ^--- error here
 sqlite> select round(avg(age),2) from students ;
 21.74
 sqlite> SELECT country, ROUND(AVG(age), 2) AS avg_age
@@ -554,14 +534,6 @@ Elena
 Ariana
 Valentina
 Laila
-sqlite> select name from students where country^='INDIA';
-Parse error: unrecognized token: "^"
-  select name from students where country^='INDIA';
-                           error here ---^
-sqlite> select name from students where country in (USA,UK);
-Parse error: no such column: USA
-  select name from students where country in (USA,UK);
-                                error here ---^
 sqlite> select name from students where country in ('USA','UK');
 David
 Noah
