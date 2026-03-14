@@ -588,3 +588,219 @@ sqlite> select * from students order by age desc limit 1 offset 1;
 sqlite> select * from students order by age desc limit 2;
 3|Sejal|27|BELGIUM
 28|Victor|25|FRANCE
+28|Victor|25|FRANCE
+sqlite> select country from students order by count(name) desc limit 1;
+Parse error: misuse of aggregate: count()
+  select country from students order by count(name) desc limit 1;
+                          error here ---^
+sqlite> select distint country from students group by country order by count(names) limit 1;
+Parse error: no such column: distint
+  select distint country from students group by country order by count(names) li
+         ^--- error here
+sqlite> select distint country from students group by country order by count(name) limit 1;
+Parse error: no such column: distint
+  select distint country from students group by country order by count(name) lim
+         ^--- error here
+sqlite> select distint country from students where country=max(name);
+Parse error: no such column: distint
+  select distint country from students where country=max(name);
+         ^--- error here
+sqlite> select distint country from students where max(name);
+Parse error: no such column: distint
+  select distint country from students where max(name);
+         ^--- error here
+sqlite> SELECT country, COUNT(*) AS student_count
+   ...> FROM students
+   ...> GROUP BY country
+   ...> ORDER BY student_count DESC
+   ...> LIMIT 1;
+INDIA|9
+sqlite> SELECT country, COUNT(*)
+   ...> FROM students
+   ...> GROUP BY country;
+ARGENTINA|2
+AUSTRALIA|3
+AUSTRIA|1
+BANGLADESH|1
+BELGIUM|2
+BHUTAN|2
+BOLIVIA|1
+BRAZIL|3
+CANADA|4
+CHILE|2
+CHINA|2
+COLOMBIA|1
+DENMARK|1
+EGYPT|1
+FINLAND|1
+FRANCE|2
+GERMANY|3
+GREECE|1
+INDIA|9
+INDONESIA|1
+ITALY|3
+JAPAN|3
+JORDAN|1
+KUWAIT|1
+MALAYSIA|1
+MALDIVES|1
+MEXICO|4
+MONGOLIA|1
+NEPAL|2
+NETHERLANDS|1
+NORWAY|1
+PAKISTAN|2
+PERU|2
+PHILIPPINES|1
+POLAND|1
+PORTUGAL|1
+QATAR|1
+RUSSIA|2
+SAUDI ARABIA|1
+SINGAPORE|1
+SOUTH KOREA|3
+SPAIN|4
+SRI LANKA|1
+SWEDEN|1
+SWITZERLAND|1
+THAILAND|1
+TURKEY|1
+UAE|3
+UK|5
+UKRAINE|1
+USA|6
+VIETNAM|1
+sqlite> SELECT name, COUNT(*) AS count
+   ...> FROM students
+   ...> GROUP BY name
+   ...> HAVING COUNT(*) > 1;
+Anna|2
+Elena|2
+Maya|2
+sqlite> SELECT COUNT(*)
+   ...> FROM (
+(x1...>     SELECT name
+(x1...>     FROM students
+(x1...>     GROUP BY name
+(x1...>     HAVING COUNT(*) > 1
+(x1...> );
+3
+sqlite> SELECT COUNT(*)
+   ...> FROM (
+(x1...>     SELECT name
+(x1...>     FROM students
+(x1...>     GROUP BY name
+(x1...>     HAVING COUNT(*) > 1
+(x1...> );
+3
+sqlite> select trim(country) from students;
+INDIA
+INDIA
+BELGIUM
+CANADA
+UAE
+CHINA
+SPAIN
+UK
+GERMANY
+JAPAN
+BRAZIL
+AUSTRALIA
+USA
+CANADA
+INDIA
+UAE
+RUSSIA
+UK
+ITALY
+MEXICO
+PAKISTAN
+JAPAN
+SPAIN
+ITALY
+EGYPT
+SAUDI ARABIA
+GERMANY
+FRANCE
+BRAZIL
+USA
+QATAR
+INDIA
+INDIA
+SPAIN
+UK
+ARGENTINA
+NEPAL
+BHUTAN
+SOUTH KOREA
+SOUTH KOREA
+USA
+CANADA
+MEXICO
+MEXICO
+CHILE
+PERU
+INDIA
+INDIA
+UAE
+PAKISTAN
+KUWAIT
+JORDAN
+USA
+USA
+CANADA
+AUSTRALIA
+AUSTRALIA
+UK
+UK
+USA
+GERMANY
+FRANCE
+ITALY
+SPAIN
+PORTUGAL
+BRAZIL
+ARGENTINA
+CHILE
+MEXICO
+COLOMBIA
+PERU
+BOLIVIA
+INDIA
+INDIA
+NEPAL
+BHUTAN
+BANGLADESH
+SRI LANKA
+MALDIVES
+THAILAND
+MALAYSIA
+SINGAPORE
+INDONESIA
+PHILIPPINES
+VIETNAM
+SOUTH KOREA
+JAPAN
+CHINA
+MONGOLIA
+RUSSIA
+UKRAINE
+POLAND
+NETHERLANDS
+BELGIUM
+SWITZERLAND
+AUSTRIA
+SWEDEN
+NORWAY
+FINLAND
+DENMARK
+GREECE
+TURKEY
+sqlite> SELECT COUNT(*)
+   ...> FROM (
+(x1...>     SELECT name
+(x1...>     FROM students
+(x1...>     GROUP BY name
+(x1...>     HAVING COUNT(*) > 1
+(x1...> );
+3
